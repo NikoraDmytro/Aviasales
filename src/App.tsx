@@ -1,9 +1,20 @@
+import { CompanyLogo } from "components/CompanyLogo";
 import React from "react";
+
+import "./App.scss";
 
 export const App = () => {
   return (
-    <div>
-      <h1>Hello World!</h1>
-    </div>
+    <>
+      <header>
+        <CompanyLogo />
+      </header>
+
+      <main>
+        <aside>Filters</aside>
+
+        <div>Tickets</div>
+      </main>
+    </>
   );
 };
