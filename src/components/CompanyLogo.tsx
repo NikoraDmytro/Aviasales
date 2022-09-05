@@ -1,5 +1,5 @@
-import globe from "img/globe.png";
-import plane from "img/plane.png";
+import globe from "shared/img/globe.png";
+import plane from "shared/img/plane.png";
 
 import styles from "./CompanyLogo.module.scss";
 

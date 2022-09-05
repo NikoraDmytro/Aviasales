@@ -1,0 +1,7 @@
+@use "./variables";
+
+.whiteBox {
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 0 3px 1px variables.$box-shadow;
+}
