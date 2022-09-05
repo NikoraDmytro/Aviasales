@@ -1,5 +1,15 @@
+@use "shared/styles/mixins";
 @use "shared/styles/components";
 
 header {
   margin-block: 50px;
+}
+
+main {
+  @include mixins.flexCenter();
+}
+
+aside {
+  padding: 1em;
+  margin-right: 30px;
 }
