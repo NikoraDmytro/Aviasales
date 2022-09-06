@@ -1,1 +1,1 @@
-export { CurrencySelect } from "./CurrencySelect";
+export { CurrencySwitch } from "./CurrencySwitch";

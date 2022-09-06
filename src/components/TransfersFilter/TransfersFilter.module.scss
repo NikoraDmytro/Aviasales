@@ -1,1 +1,100 @@
+@use "shared/styles/mixins";
+@use "shared/styles/variables";
 @use "shared/styles/components";
+
+.filtersContainer {
+  margin-inline: -16px;
+}
+
+.filter {
+  width: 100%;
+  display: flex;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px 16px;
+  align-items: center;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    background-color: variables.$hover-blue;
+
+    .pickOnlyBtn {
+      opacity: 1;
+    }
+
+    input:not(:checked) + .checkmark {
+      border-color: variables.$blue;
+    }
+  }
+
+  input {
+    position: absolute;
+    visibility: hidden;
+
+    &:checked + .checkmark {
+      transform: rotateY(360deg);
+      border-color: variables.$dark-blue;
+      background-color: variables.$hover-blue-box;
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  .checkmark {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin-right: 12px;
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.3s ease;
+    border: 1px solid variables.$gray-main;
+
+    &::after {
+      opacity: 0;
+      width: 8px;
+      height: 4px;
+      content: "";
+      inset: 45% 50%;
+      border-radius: 2px;
+      position: absolute;
+      transition: opacity 0.1s ease;
+      border-left: 3px solid variables.$dark-blue;
+      border-bottom: 3px solid variables.$dark-blue;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+
+  .pickOnlyBtn {
+    @include mixins.resetBtn();
+
+    opacity: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-left: auto;
+    position: relative;
+    transition: all 0.25s;
+    text-transform: uppercase;
+    color: variables.$dark-blue;
+
+    &::after {
+      content: "";
+      width: 100%;
+      height: 1px;
+      display: block;
+      inset: 100% 0;
+      position: absolute;
+      border-radius: 4px;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      background-color: variables.$dark-blue;
+    }
+
+    &:hover::after {
+      transform: scaleX(1.2);
+    }
+  }
+}
