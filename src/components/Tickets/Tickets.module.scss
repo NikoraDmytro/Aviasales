@@ -1,1 +1,7 @@
-@use "shared/styles/components";
+.ticketsList {
+  list-style-type: none;
+
+  li {
+    margin-bottom: 30px;
+  }
+}

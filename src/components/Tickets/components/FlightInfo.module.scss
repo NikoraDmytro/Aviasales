@@ -1,0 +1,54 @@
+@use "shared/styles/variables";
+
+.flightInfoBox {
+  width: 450px;
+
+  > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.timeSpan {
+  line-height: 1;
+  font-size: 42px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.placesBlock {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.datesBlock {
+  font-size: 14px;
+  font-weight: 300;
+  color: variables.$secondary;
+}
+
+.transfers {
+  width: 130px;
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  position: relative;
+  text-align: center;
+  margin-inline: 10px;
+  height: fit-content;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  color: variables.$secondary;
+  border-bottom: 1.5px solid variables.$secondary;
+
+  > img {
+    width: 18px;
+    right: -8px;
+    height: 18px;
+    bottom: -9.5px;
+    position: absolute;
+    background-color: transparent;
+  }
+}

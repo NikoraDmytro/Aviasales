@@ -1,0 +1,51 @@
+@use "shared/styles/mixins";
+@use "shared/styles/variables";
+@use "shared/styles/components";
+
+.ticketBox {
+  display: flex;
+  flex-direction: row;
+  transition: box-shadow 0.1s ease-in;
+
+  &:hover {
+    box-shadow: 0 0 3px 1px variables.$box-shadow,
+      0 10px 10px 0 variables.$box-shadow;
+  }
+
+  > div {
+    padding: 30px;
+  }
+
+  > div:first-of-type {
+    border-right: 2px solid variables.$gray-light;
+  }
+}
+
+.airlinesLogo {
+  width: 140px;
+  height: auto;
+  margin: auto;
+  display: block;
+  margin-bottom: 35px;
+}
+
+.buyTicketBtn {
+  @include mixins.resetBtn();
+
+  width: 180px;
+  height: 65px;
+  display: block;
+  color: white;
+  font-size: 20px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  background-color: variables.$button;
+
+  &:hover {
+    background-color: variables.$button-hover;
+  }
+
+  &:active {
+    opacity: 0.6;
+  }
+}
