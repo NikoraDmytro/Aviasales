@@ -1,5 +1,10 @@
 import classNames from "classnames";
 
+import { useTypedSelector } from "redux/hooks";
+import { selectCurrentCurrency } from "redux/reducers/currenciesReducer";
+
+import { formatPrice } from "./../utils/transformNumber";
+
 import { ITicket } from "shared/models/ITicket";
 import turkishAirlines from "shared/img/turkishAirlines.png";
 
@@ -9,9 +14,13 @@ import styles from "./Ticket.module.scss";
 
 interface Props {
   ticket: ITicket;
+  buyTicket: () => void;
 }
 
-export const Ticket = ({ ticket }: Props) => {
+export const Ticket = ({ ticket, buyTicket }: Props) => {
+  const currency = useTypedSelector(selectCurrentCurrency);
+  const price = ticket.price * currency.rate;
+
   return (
     <div className={classNames(styles.whiteBox, styles.ticketBox)}>
       <div>
@@ -21,8 +30,9 @@ export const Ticket = ({ ticket }: Props) => {
           alt="Turkish Airlines"
         />
 
-        <button className={styles.buyTicketBtn}>
-          Купить <br /> за {ticket.price}
+        <button onClick={buyTicket} className={styles.buyTicketBtn}>
+          Купить <br /> за {formatPrice(price)}
+          {" " + currency.symbol}
         </button>
       </div>
 

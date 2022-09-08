@@ -53,9 +53,10 @@ export const {
 } = filtersSlice.actions;
 
 export const selectTransfersFilters = (state: RootState) => {
-  return state.filters.transfers.ids.map(
-    (id) => state.filters.transfers.entries[id]
-  );
+  const ids = state.filters.transfers.ids;
+  const filters = state.filters.transfers.entries;
+
+  return ids.map((id) => filters[id]);
 };
 
 export default filtersSlice.reducer;
