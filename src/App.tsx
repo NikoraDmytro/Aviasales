@@ -3,7 +3,7 @@ import React from "react";
 import { Tickets } from "components/Tickets";
 import { CompanyLogo } from "components/CompanyLogo";
 import { CurrencySwitch } from "components/CurrencySelect";
-import { TransfersFilter } from "components/TransfersFilter";
+import { TransfersFilters } from "components/TransfersFilters";
 
 import "./App.scss";
 
@@ -18,7 +18,7 @@ export const App = () => {
         <aside className="whiteBox">
           <CurrencySwitch />
 
-          <TransfersFilter />
+          <TransfersFilters />
         </aside>
 
         <div>
