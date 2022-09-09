@@ -14,6 +14,10 @@ interface FormValues {
   passportNumber: string;
 }
 
+interface Props {
+  onSuccess: () => void;
+}
+
 const initialValues: FormValues = {
   email: "",
   phone: "",
@@ -22,63 +26,59 @@ const initialValues: FormValues = {
   passportNumber: "",
 };
 
-export const BuyTicketForm = () => {
-  return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationObject}
-      onSubmit={(values, { setSubmitting, resetForm }) => {
-        console.log(values);
+export const BuyTicketForm = ({ onSuccess }: Props) => (
+  <Formik
+    initialValues={initialValues}
+    validationSchema={validationObject}
+    onSubmit={(_, { setSubmitting }) => {
+      onSuccess();
+      setSubmitting(false);
+    }}
+  >
+    <Form className={styles.ticketForm}>
+      <h1 className={styles.formTitle}>Купить билет</h1>
 
-        resetForm();
-        setSubmitting(false);
-      }}
-    >
-      <Form className={styles.ticketForm}>
-        <h1 className={styles.formTitle}>Купить билет</h1>
+      <div className={styles.formControlsBox}>
+        <InputField
+          name="firstName"
+          type="text"
+          placeholder="Имя"
+          label="Имя"
+        />
+        <InputField
+          name="secondName"
+          type="text"
+          label="Фамилия"
+          placeholder="Фамилия"
+        />
 
-        <div className={styles.formControlsBox}>
-          <InputField
-            name="firstName"
-            type="text"
-            placeholder="Имя"
-            label="Имя"
-          />
-          <InputField
-            name="secondName"
-            type="text"
-            label="Фамилия"
-            placeholder="Фамилия"
-          />
+        <InputField
+          name="phone"
+          type="tel"
+          label="Номер телефона"
+          className={styles.fullWidthInput}
+          placeholder="+380 (66)623-88-21"
+        />
 
-          <InputField
-            name="phone"
-            type="tel"
-            label="Номер телефона"
-            className={styles.fullWidthInput}
-            placeholder="+380 (66)623-88-21"
-          />
+        <InputField
+          name="email"
+          type="email"
+          label="Електронная почта"
+          className={styles.fullWidthInput}
+          placeholder="email@address.com"
+        />
+        <InputField
+          type="text"
+          name="passportNumber"
+          label="Номер паспорта"
+          placeholder="XXXXXXXXX"
+          className={styles.passportNumberInput}
+        />
+      </div>
 
-          <InputField
-            name="email"
-            type="email"
-            label="Електронная почта"
-            className={styles.fullWidthInput}
-            placeholder="email@address.com"
-          />
-          <InputField
-            type="text"
-            name="passportNumber"
-            label="Номер паспорта"
-            placeholder="XXXXXXXXX"
-            className={styles.passportNumberInput}
-          />
-        </div>
-
-        <button className={styles.submitBtn} type="submit">
-          Подтвердить
-        </button>
-      </Form>
-    </Formik>
-  );
-};
+      <button className={styles.submitBtn} type="submit">
+        Подтвердить
+      </button>
+    </Form>
+  </Formik>
+);

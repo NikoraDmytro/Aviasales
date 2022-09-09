@@ -34,7 +34,7 @@ export const Tickets = () => {
   return (
     <ul className={styles.ticketsList}>
       <Modal visible={modalVisible} close={closeModal}>
-        <BuyTicketForm />
+        {(hide) => <BuyTicketForm onSuccess={hide} />}
       </Modal>
 
       {tickets.map((ticket) => (

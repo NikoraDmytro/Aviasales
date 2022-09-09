@@ -7,7 +7,7 @@ import styles from "./Modal.module.scss";
 interface Props {
   visible: boolean;
   close: () => void;
-  children: React.ReactNode;
+  children: (hideModal: () => void) => React.ReactNode;
 }
 
 export const Modal = ({ visible, children, close }: Props) => {
@@ -47,7 +47,7 @@ export const Modal = ({ visible, children, close }: Props) => {
       onAnimationEnd={handleAnimationEnd}
     >
       <div className={styles.modal}>
-        {children}
+        {children(hideModal)}
 
         <button className={styles.closeModalBtn} onClick={hideModal}></button>
       </div>
