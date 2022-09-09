@@ -1,0 +1,62 @@
+@use "shared/styles/mixins";
+@use "shared/styles/variables";
+
+.inputField {
+  width: fit-content;
+
+  input {
+    @include mixins.resetInput();
+
+    padding: 14px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 4px;
+    border: 1.5px solid variables.$gray-main;
+
+    &:focus {
+      border-color: darken(variables.$gray-main, 40);
+    }
+  }
+
+  label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+}
+
+.valid,
+.invalid {
+  input,
+  input:focus {
+    border-color: transparent;
+  }
+}
+
+.valid {
+  input {
+    outline: 2px solid rgb(0, 255, 0);
+  }
+}
+
+.invalid {
+  input {
+    outline: 2px solid red;
+    animation: shake 0.25s 2;
+  }
+}
+
+@keyframes shake {
+  from {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  to {
+    transform: rotate(0);
+  }
+}

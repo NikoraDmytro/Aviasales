@@ -13,9 +13,21 @@ interface Props {
 export const Modal = ({ visible, children, close }: Props) => {
   const [isHiding, setIsHiding] = useState(false);
 
+  if (!visible) {
+    return null;
+  }
+
   const wrapperClassName = classNames(styles.modalWrapper, {
     [styles.visible]: visible && !isHiding,
   });
+
+  const handleOutsideClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    if (target.classList.contains(styles.modalWrapper)) {
+      hideModal();
+    }
+  };
 
   const hideModal = () => {
     setIsHiding(true);
@@ -28,14 +40,10 @@ export const Modal = ({ visible, children, close }: Props) => {
     }
   };
 
-  if (!visible) {
-    return null;
-  }
-
   return ReactDOM.createPortal(
     <div
-      onClick={hideModal}
       className={wrapperClassName}
+      onMouseDown={handleOutsideClick}
       onAnimationEnd={handleAnimationEnd}
     >
       <div className={styles.modal}>

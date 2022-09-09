@@ -5,6 +5,12 @@
   background-color: transparent;
 }
 
+@mixin resetInput {
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
 @mixin flexCenter($direction: row) {
   display: flex;
   align-items: center;

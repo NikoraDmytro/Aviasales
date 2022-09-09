@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useTypedSelector } from "redux/hooks";
 import { selectTransfersFilters } from "redux/reducers/filtersReducer";
 
+import { Modal } from "components/Modal";
 import { Ticket } from "./components/Ticket";
+import { BuyTicketForm } from "components/BuyTicketForm";
+
 import { getTickets } from "./utils/getTickets";
 import { ITicket } from "shared/models/ITicket";
 
 import styles from "./Tickets.module.scss";
-import { Modal } from "components/Modal";
 
 export const Tickets = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -32,7 +34,7 @@ export const Tickets = () => {
   return (
     <ul className={styles.ticketsList}>
       <Modal visible={modalVisible} close={closeModal}>
-        Купить билет
+        <BuyTicketForm />
       </Modal>
 
       {tickets.map((ticket) => (
