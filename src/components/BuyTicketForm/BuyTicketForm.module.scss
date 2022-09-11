@@ -34,9 +34,19 @@
   width: 180px;
   padding: 14px;
   color: white;
+  display: block;
   font-size: 20px;
   margin-top: 32px;
   font-weight: 500;
   border-radius: 6px;
+  transition: all 0.25s;
   background-color: variables.$button;
+
+  &:hover {
+    background-color: darken(variables.$button, 20%);
+  }
+
+  &:active {
+    opacity: 0.6;
+  }
 }

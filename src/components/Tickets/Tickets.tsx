@@ -11,8 +11,10 @@ import { ITicket } from "shared/models/ITicket";
 
 import styles from "./Tickets.module.scss";
 
+type ModalState = "hidden" | "visible" | "success";
+
 export const Tickets = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalState, setModalState] = useState<ModalState>("hidden");
   const transfersFilters = useTypedSelector(selectTransfersFilters);
 
   const tickets = getTickets(transfersFilters);
@@ -24,17 +26,24 @@ export const Tickets = () => {
     ticket.arrival_date +
     ticket.arrival_time;
 
-  const openModal = () => {
-    setModalVisible(true);
-  };
-  const closeModal = () => {
-    setModalVisible(false);
-  };
+  const isVisible = modalState === "visible";
+  const isSuccess = modalState === "success";
+  const closeModal = () => setModalState("hidden");
+  const openModal = () => setModalState("visible");
+  const showSuccessModal = () => setModalState("success");
 
   return (
     <ul className={styles.ticketsList}>
-      <Modal visible={modalVisible} close={closeModal}>
-        {(hide) => <BuyTicketForm onSuccess={hide} />}
+      <Modal visible={isVisible} close={closeModal}>
+        <BuyTicketForm onSuccess={showSuccessModal} />
+      </Modal>
+      <Modal
+        visible={isSuccess}
+        close={closeModal}
+        className={styles.successModal}
+      >
+        <span className={styles.tick}></span>
+        <h1>Билет оформлен</h1>
       </Modal>
 
       {tickets.map((ticket) => (
