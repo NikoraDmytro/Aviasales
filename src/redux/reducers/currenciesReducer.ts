@@ -1,15 +1,11 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-import { ICurrency } from "shared/models/ICurrency";
-
 import { RootState } from "redux/store";
+import {
+  CurrencyAction,
+  CurrencyActionTypes,
+  CurrencyState,
+} from "redux/types/currency";
 
-interface CurrenciesState {
-  current: string;
-  all: { [name: string]: ICurrency };
-}
-
-const initialState: CurrenciesState = {
+const initialState: CurrencyState = {
   current: "RUB",
   all: {
     RUB: {
@@ -30,21 +26,17 @@ const initialState: CurrenciesState = {
   },
 };
 
-export const currenciesSlice = createSlice({
-  name: "currencies",
-  initialState,
-  reducers: {
-    setCurrentCurrency: (state, action: PayloadAction<string>) => {
-      const name = action.payload;
-
-      if (name in state.all) {
-        state.current = name;
-      }
-    },
-  },
-});
-
-export const { setCurrentCurrency } = currenciesSlice.actions;
+export const currencyReducer = (
+  state = initialState,
+  action: CurrencyAction
+): CurrencyState => {
+  switch (action.type) {
+    case CurrencyActionTypes.SET_CURRENT_CURRENCY:
+      return { ...state, current: action.payload };
+    default:
+      return state;
+  }
+};
 
 export const selectCurrentCurrency = (state: RootState) => {
   const currencies = state.currency.all;
@@ -52,5 +44,3 @@ export const selectCurrentCurrency = (state: RootState) => {
 
   return currencies[current];
 };
-
-export default currenciesSlice.reducer;

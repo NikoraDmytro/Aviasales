@@ -1,6 +1,9 @@
-import { FilterAction, FilterActionTypes } from "redux/types/filter";
+import {
+  FilterActionTypes,
+  resetTransfersFiltersAction,
+} from "redux/types/filter";
 
-export const resetTransferFilters = (): FilterAction => {
+export const resetTransferFilters = (): resetTransfersFiltersAction => {
   return {
     type: FilterActionTypes.RESET_TRANSFER_FILTERS,
   };

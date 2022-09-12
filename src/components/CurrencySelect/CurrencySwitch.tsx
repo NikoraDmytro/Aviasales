@@ -1,6 +1,6 @@
 import React from "react";
 import { useTypedSelector, useTypedDispatch } from "redux/hooks";
-import { setCurrentCurrency } from "redux/reducers/currenciesReducer";
+import { setCurrentCurrency } from "redux/actionCreators/setCurrentCurrency";
 
 import styles from "./CurrencySelect.module.scss";
 
