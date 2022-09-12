@@ -1,15 +1,13 @@
 import React from "react";
-import {
-  resetTransfersFilters,
-  setOneTransfersFilter,
-  toggleTransfersFilter,
-} from "redux/reducers/filtersReducer";
 
 import { Filter } from "components/Filter";
 
 import { useTypedDispatch, useTypedSelector } from "redux/hooks";
 
 import styles from "./TransfersFilter.module.scss";
+import { toggleTransferFilter } from "redux/actionCreators/toggleTransferFilter";
+import { setOneTransferFilter } from "redux/actionCreators/setOneTransferFilter";
+import { resetTransferFilters } from "redux/actionCreators/resetTransferFilters";
 
 const filters = [
   { id: "noTransfers", value: 0, label: "Без пересадок" },
@@ -21,13 +19,7 @@ const filters = [
 export const TransfersFilters = () => {
   const dispatch = useTypedDispatch();
 
-  const activeFilters = useTypedSelector((state) => state.filters.transfers);
-
-  const toggleFilter = (id: string, value: number) => () =>
-    dispatch(toggleTransfersFilter({ id, value }));
-  const setOneFilter = (id: string, value: number) => () =>
-    dispatch(setOneTransfersFilter({ id, value }));
-  const resetFilters = () => dispatch(resetTransfersFilters());
+  const activeFilters = useTypedSelector((state) => state.filter.transfers);
 
   return (
     <>
@@ -37,18 +29,17 @@ export const TransfersFilters = () => {
         <Filter
           label="Все"
           id="allTransfers"
-          checked={!activeFilters.ids.length}
-          toggle={() => dispatch(resetFilters())}
+          checked={!activeFilters.length}
+          toggle={() => dispatch(resetTransferFilters())}
         />
 
         {filters.map((filter) => (
           <Filter
-            id={filter.id}
+            {...filter}
             key={filter.id}
-            label={filter.label}
-            checked={filter.id in activeFilters.entries}
-            toggle={toggleFilter(filter.id, filter.value)}
-            pickOnly={setOneFilter(filter.id, filter.value)}
+            checked={activeFilters.includes(filter.value)}
+            toggle={() => dispatch(toggleTransferFilter(filter.value))}
+            pickOnly={() => dispatch(setOneTransferFilter(filter.value))}
           />
         ))}
       </div>

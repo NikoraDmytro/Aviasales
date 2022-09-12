@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useTypedDispatch, useTypedSelector } from "redux/hooks";
 import { fetchTickets } from "redux/actionCreators/fetchTickets";
-import { selectTransfersFilters } from "redux/reducers/filtersReducer";
 
 import { Loader } from "components/Loader";
 
@@ -13,10 +12,8 @@ interface Props {
 
 export const Wrapper = ({ children }: Props) => {
   const dispatch = useTypedDispatch();
-  const transfers = useTypedSelector(selectTransfersFilters);
-  const { tickets, loading, error } = useTypedSelector(
-    (state) => state.tickets
-  );
+  const transfers = useTypedSelector((state) => state.filter.transfers);
+  const { tickets, loading, error } = useTypedSelector((state) => state.ticket);
 
   useEffect(() => {
     dispatch(fetchTickets());

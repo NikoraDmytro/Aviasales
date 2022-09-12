@@ -1,62 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "redux/store";
-import { TransferFilterPayload } from "redux/types/ActionPayloads";
+import {
+  FilterAction,
+  FilterActionTypes,
+  FilterState,
+} from "./../types/filter";
 
-import { NormalizedData } from "redux/types/NormalizedData";
-
-interface FiltersState {
-  transfers: NormalizedData<number>;
-}
-
-const initialState: FiltersState = {
-  transfers: {
-    ids: [],
-    entries: {},
-  },
+const initialState: FilterState = {
+  transfers: [],
 };
 
-export const filtersSlice = createSlice({
-  name: "filters",
-  initialState,
-  reducers: {
-    toggleTransfersFilter: (state, action: TransferFilterPayload) => {
-      const { id, value } = action.payload;
+export const filterReducer = (
+  state = initialState,
+  action: FilterAction
+): FilterState => {
+  switch (action.type) {
+    case FilterActionTypes.TOGGLE_TRANSFER_FILTER:
+      const index = state.transfers.indexOf(action.payload);
 
-      if (id in state.transfers.entries) {
-        delete state.transfers.entries[id];
-
-        state.transfers.ids = state.transfers.ids.filter(
-          (filterId) => filterId !== id
-        );
-        return;
+      if (index !== -1) {
+        return {
+          transfers: state.transfers.splice(index, 1),
+        };
       }
 
-      state.transfers.ids.push(id);
-      state.transfers.entries[id] = value;
-    },
-    setOneTransfersFilter: (state, action: TransferFilterPayload) => {
-      const { id, value } = action.payload;
-
-      state.transfers.entries = { [id]: value };
-      state.transfers.ids = [id];
-    },
-    resetTransfersFilters: (state) => {
-      state.transfers = initialState.transfers;
-    },
-  },
-});
-
-export const {
-  toggleTransfersFilter,
-  setOneTransfersFilter,
-  resetTransfersFilters,
-} = filtersSlice.actions;
-
-export const selectTransfersFilters = (state: RootState) => {
-  const ids = state.filters.transfers.ids;
-  const filters = state.filters.transfers.entries;
-
-  return ids.map((id) => filters[id]);
+      return { transfers: [...state.transfers, action.payload] };
+    case FilterActionTypes.SET_ONE_TRANSFER_FILTER:
+      return { transfers: [action.payload] };
+    case FilterActionTypes.RESET_TRANSFER_FILTERS:
+      return { transfers: [] };
+    default:
+      return state;
+  }
 };
-
-export default filtersSlice.reducer;

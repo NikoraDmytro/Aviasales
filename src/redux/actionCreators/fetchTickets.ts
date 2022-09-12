@@ -4,7 +4,7 @@ import { TicketAction, TicketActionTypes } from "redux/types/ticket";
 import tickets from "shared/tickets.json";
 
 export const fetchTickets = () => {
-  return async (dispatch: Dispatch<TicketAction>) => {
+  return (dispatch: Dispatch<TicketAction>) => {
     try {
       dispatch({ type: TicketActionTypes.FETCH_TICKETS });
 

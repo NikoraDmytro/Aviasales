@@ -17,6 +17,7 @@ export const Tickets = () => {
 
   const isVisible = modalState === "visible";
   const isSuccess = modalState === "success";
+
   const closeModal = () => setModalState("hidden");
   const openModal = () => setModalState("visible");
   const openSuccessModal = () => setModalState("success");

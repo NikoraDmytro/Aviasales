@@ -34,7 +34,7 @@ const Currency = ({ name, checked }: CurrencyProps) => {
 };
 
 export const CurrencySwitch = () => {
-  const { all, current } = useTypedSelector((state) => state.currencies);
+  const { all, current } = useTypedSelector((state) => state.currency);
 
   const currencies = Object.values(all);
 

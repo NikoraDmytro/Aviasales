@@ -47,8 +47,8 @@ export const currenciesSlice = createSlice({
 export const { setCurrentCurrency } = currenciesSlice.actions;
 
 export const selectCurrentCurrency = (state: RootState) => {
-  const currencies = state.currencies.all;
-  const current = state.currencies.current;
+  const currencies = state.currency.all;
+  const current = state.currency.current;
 
   return currencies[current];
 };
